@@ -51,7 +51,7 @@ def update_figs(n):
     )
     style = {'padding': '5px', 'fontSize': '30px'}
     print(type(b))
-    return [html.Span('The latest updated data: ' + str(b), style=style)]
+    return [html.Span('The latest generated data: ' + str(b), style=style)]
 
 # def get_dataframe():
 #     """Retrieve the dataframe from Redis
