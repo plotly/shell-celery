@@ -23,7 +23,7 @@ if "DYNO" in os.environ:
     if bool(os.getenv("DASH_PATH_ROUTING", 0)):
         app.config.requests_pathname_prefix = "/{}/".format(os.environ["DASH_APP_NAME"])
 
-redis_instance = redis.StrictRedis.from_url(os.environ["REDIS_URL"])
+# redis_instance = redis.StrictRedis.from_url(os.environ["REDIS_URL"])
 
 
 def serve_layout():
@@ -46,9 +46,10 @@ app.layout = serve_layout
               [Input('live-update', 'n_intervals')])
 def update_figs(n):
     print('start updating text display')
-    b = redis_instance.hget(
-        tasks.REDIS_HASH_NAME, tasks.REDIS_KEYS["DATASET"]
-    )
+    # b = redis_instance.hget(
+    #     tasks.REDIS_HASH_NAME, tasks.REDIS_KEYS["DATASET"]
+    # )
+    b = 0.23
     style = {'padding': '5px', 'fontSize': '30px'}
     print(type(b))
     return [html.Span('The latest generated data: ' + str(b), style=style)]

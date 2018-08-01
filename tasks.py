@@ -11,10 +11,10 @@ from celery import Celery
 
 celery_app = Celery("Celery App", broker=os.environ["REDIS_URL"])
 
-redis_instance = redis.StrictRedis.from_url(os.environ["REDIS_URL"])
+# redis_instance = redis.StrictRedis.from_url(os.environ["REDIS_URL"])
 
-REDIS_HASH_NAME = os.environ.get("DASH_APP_NAME", "app-data")
-REDIS_KEYS = {"DATASET": "DATASET", "DATE_UPDATED": "DATE_UPDATED"}
+# REDIS_HASH_NAME = os.environ.get("DASH_APP_NAME", "app-data")
+# REDIS_KEYS = {"DATASET": "DATASET", "DATE_UPDATED": "DATE_UPDATED"}
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
@@ -33,8 +33,8 @@ def update_data():
     print('pull new data')
     data = np.random.normal(size=1)
     print(data[0])
-    redis_instance.hset(
-        REDIS_HASH_NAME,
-        REDIS_KEYS["DATASET"],
-        data[0],
-    )
+    # redis_instance.hset(
+    #     REDIS_HASH_NAME,
+    #     REDIS_KEYS["DATASET"],
+    #     data[0],
+    # )
