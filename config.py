@@ -8,6 +8,7 @@ import os
 # Dash App Manager
 DASH_APP_NAME = 'shell-sample-celery'
 
+
 # Set to 'private' if you want to add a login screen to your app
 # You can choose who can view the app in your list of files
 # at <your-plotly-server>/organize.
