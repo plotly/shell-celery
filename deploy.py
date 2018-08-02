@@ -12,12 +12,23 @@ print("Your dash server is: "+DASH_SERVER)
 TRACKED_REPO = DASH_SERVER.replace('.', '-')+'-'+DASH_APP_NAME.replace('.', '-')
 print("The tracked repo is: "+TRACKED_REPO)
 
+# https://stackoverflow.com/questions/287871/print-in-terminal-with-colors
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 # Change number of workers if needed
 while True:
-	link_celery = raw_input("Do you need to change the number of workers for your app? (Yes/No): ")
+	link_celery = raw_input(bcolors.HEADER + "Do you need to add or change the number of workers for your app? You probably need to do this if you're using celery (Yes/No): " + bcolors.ENDC)
 	if link_celery.lower() == "yes":
 		workers = raw_input("How many workers does your app need? ")
-		print('Running: ssh dokku@'+DASH_SERVER+' ps:scale '+DASH_APP_NAME+' worker='+workers)
+		print(bcolors.OKBLUE + 'Running: ssh dokku@'+DASH_SERVER+' ps:scale '+DASH_APP_NAME+' worker='+workers + bcolors.ENDC)
 		ps_scale_code = call(['ssh', 'dokku@'+DASH_SERVER, 'ps:scale', DASH_APP_NAME, 'worker='+workers])
 		if ps_scale_code == 0:
 			print(DASH_APP_NAME+' was scaled to '+workers+' workers')
