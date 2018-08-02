@@ -16,8 +16,7 @@ app = dash.Dash("app")
 server = app.server
 
 # initialize the data when the app starts
-tasks.update_data()
-
+# tasks.update_data()
 
 if "DYNO" in os.environ:
     if bool(os.getenv("DASH_PATH_ROUTING", 0)):
@@ -25,6 +24,11 @@ if "DYNO" in os.environ:
 
 redis_instance = redis.StrictRedis.from_url(os.environ["REDIS_URL"])
 
+redis_instance.hset(
+    REDIS_HASH_NAME,
+    REDIS_KEYS["DATASET"],
+    0.23,
+)
 
 def serve_layout():
     return html.Div(
@@ -46,6 +50,7 @@ app.layout = serve_layout
               [Input('live-update', 'n_intervals')])
 def update_figs(n):
     print('start updating text display')
+
     b = redis_instance.hget(
         tasks.REDIS_HASH_NAME, tasks.REDIS_KEYS["DATASET"]
     )
