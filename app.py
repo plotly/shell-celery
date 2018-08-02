@@ -25,8 +25,8 @@ if "DYNO" in os.environ:
 redis_instance = redis.StrictRedis.from_url(os.environ["REDIS_URL"])
 
 redis_instance.hset(
-    REDIS_HASH_NAME,
-    REDIS_KEYS["DATASET"],
+    tasks.REDIS_HASH_NAME,
+    tasks.REDIS_KEYS["DATASET"],
     0.23,
 )
 
